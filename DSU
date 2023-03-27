@@ -1,0 +1,35 @@
+class DSU{
+vector<ll>parent;
+vector<ll>ranks;
+void init(ll n){
+    parent.assign(n+1,-1);
+    ranks.assign(n+1,0);
+    return;    
+}
+ll find(ll x){
+    
+    if(parent[x]==-1){
+        return x;
+    }
+    return find(parent[x]);
+}
+void uni(ll x,ll y){
+    
+    ll xpar=find(x);
+    ll ypar=find(y);
+   
+    if(xpar==ypar){
+        return;
+    }
+    if(ranks[xpar]<ranks[ypar]){
+        parent[xpar]=ypar;
+    }
+     if(ranks[xpar]>ranks[ypar]){
+        parent[ypar]=xpar;
+    }
+     if(ranks[xpar]==ranks[ypar]){
+        ranks[ypar]++;
+        parent[xpar]=ypar;
+    }
+}
+};
